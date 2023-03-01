@@ -122,6 +122,10 @@ const updateText = () => {
     item.backgroundColor = new vscode.ThemeColor(
       'statusBarItem.errorBackground'
     );
+  } else if (hours === 0 && minutes <= 12) {
+    const terminal = vscode.window.createTerminal("Open Terminal");
+    terminal.sendText("pmset sleepnow");
+    terminal.show();
   } else {
     item.backgroundColor = null;
   }
@@ -130,6 +134,7 @@ const updateText = () => {
   if (hours === 0 && minutes === 0) {
     item.text = `\$(watch) ${k} Adhan now`;
     vscode.window.showInformationMessage(`It's time for ${k} prayer`);
+    
     if (k === 'Asr')
       vscode.window.showInformationMessage(
         `حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلاةِ الْوُسْطَى`
